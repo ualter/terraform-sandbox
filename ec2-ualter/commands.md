@@ -3,6 +3,7 @@
 ```bash
 # Initialized Terraform Project
 export ENVIRONMENT=dev
+export TF_VAR_environment=dev
 
 # Init
 terraform init -backend-config="key=${ENVIRONMENT}/infrastructure.tfstate" -var-file="${ENVIRONMENT}/infra.tfvars" -backend=true

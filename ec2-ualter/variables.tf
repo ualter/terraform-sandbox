@@ -12,3 +12,8 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   default     = {}
 }
+
+variable "environment" {
+  description = "Which environment we are running this"
+  default     = ""
+}
