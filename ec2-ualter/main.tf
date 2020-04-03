@@ -23,13 +23,21 @@ resource "aws_vpc" "infra" {
   tags = "${merge(map("Name","vpc-infra"),"${local.allTags}")}"
 }
 
+resource "aws_subnet" "infra_subnet" {
+  vpc_id = "${aws_vpc.infra.id}"
+  cidr_block = "10.1.0.0/27"
+  tags = "${merge(map("Name","subnet-infra"),"${local.allTags}")}"
+}
+
 resource "aws_instance" "web" {
   ami           = "${data.aws_ami.linux.id}"
   instance_type = "t2.micro"
+  count = 2
+  subnet_id = "${aws_subnet.infra_subnet.id}"
 
   tags = "${local.allTags}"
 }
 
 output "vpc_id" {
-  value = "aws_vpc.id"
+  value = "${aws_vpc.infra.id}"
 }

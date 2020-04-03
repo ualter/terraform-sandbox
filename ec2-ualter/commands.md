@@ -5,14 +5,15 @@
 export ENVIRONMENT=dev
 export TF_VAR_environment=dev
 
+## Steps
 # Init
-terraform init -backend-config="key=${ENVIRONMENT}/infrastructure.tfstate" -var-file="${ENVIRONMENT}/infra.tfvars" -backend=true
+terraform init -backend-config="key=${ENVIRONMENT}/infrastructure.tfstate" -backend-config="dynamodb_table=terraform_${ENVIRONMENT}_remote_state_lock" -var-file="${ENVIRONMENT}/infra.tfvars" -backend=true -get=true -lock=true 
 # Plan
 terraform plan -var-file="${ENVIRONMENT}/infra.tfvars" -out tfplan
 # Apply
-terraform apply tfplan
+terraform apply --auto-approve -no-color -lock=true tfplan 
 # Destroy
-terraform destroy -var-file="${ENVIRONMENT}/infra.tfvars"
+terraform destroy -no-color -lock=true -var-file="${ENVIRONMENT}/infra.tfvars"
 
 # Create Workspaces
 terraform workspace new dev
@@ -35,5 +36,8 @@ aws ec2 describe-images --filter "Name=image-id,Values=ami-09def150731bdbcc2" --
 
 # Create S3 Bucket for Backend
 aws s3api create-bucket --bucket iac-ec2-remote-state --region eu-west-3 --create-bucket-configuration LocationConstraint=eu-west-3
+
+# Import an existing AWS Instance (must be change the terrafor configuration script to add the aws instance example before)
+terraform import -var-file=dev/infra.tfvars  aws_instance.example i-0953368a71600c848
 ``` 
 
