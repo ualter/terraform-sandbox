@@ -4,6 +4,9 @@
 # Initialized Terraform Project
 export ENVIRONMENT=dev
 export TF_VAR_environment=dev
+# Check prepared_backend folder, to do it automatically (DynamoDB and S3 for Backend remote state and Locking)
+# The S3 Bucket is necessary to storage the Terraform state remotely
+# The DynamoDB table is necessary to Lock the State while a user is being running the Terraform against it
 
 ## Steps
 # Init
