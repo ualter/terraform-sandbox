@@ -17,3 +17,8 @@ variable "environment" {
   description = "Which environment we are running this"
   default     = ""
 }
+
+variable "aws_linux_user_data" {
+  description = "User data for AWS Linux 2 AMI"
+  default     = ""
+}

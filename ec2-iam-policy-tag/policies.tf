@@ -54,8 +54,8 @@ resource "aws_iam_policy" "UJR_SSMManagedInstanceCore" {
 EOF
 }
 
-resource "aws_iam_role" "UJR_SSMRoleForInstancesSetup" {
-  name = "UJR_SSMRoleForInstancesSetup"
+resource "aws_iam_role" "UJR_SSMRoleForEC2Instances" {
+  name = "UJR_SSMRoleForEC2Instances"
 
   assume_role_policy = <<EOF
 {
@@ -77,6 +77,11 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "attach_role_policy_ujr_ssm" {
-  role = "${aws_iam_role.UJR_SSMRoleForInstancesSetup.name}"
+  role = "${aws_iam_role.UJR_SSMRoleForEC2Instances.name}"
   policy_arn = "${aws_iam_policy.UJR_SSMManagedInstanceCore.arn}"
+}
+
+resource "aws_iam_instance_profile" "UJR_SSMRoleForEC2Instances" {
+    name ="UJR_SSMRoleForEC2Instances"
+    role = "${aws_iam_role.UJR_SSMRoleForEC2Instances.name}"
 }
