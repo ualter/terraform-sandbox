@@ -17,7 +17,7 @@ aws_linux_user_data =<<EOF
     chmod 2775 /var/www
     find /var/www -type d -exec chmod 2775 {} \;
     find /var/www -type f -exec chmod 0664 {} \;
-    echo "<html><head></head><body><h3>Hello from $(hostname -f)</h3></body></html>" > /var/www/html/index.html
+    echo "<html><head></head><body><h3>Hello from $(hostname)</h3></body></html>" > /var/www/html/index.html
 EOF
 
 # Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-03ab4e8f1d88ce614 
