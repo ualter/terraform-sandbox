@@ -1,11 +1,11 @@
 variable "aws_region" {
   description = "The region to create the EC2 Instance"
-  default=""
+  default     = ""
 }
 
 variable "aws_image_id" {
   description = "The chosen AMI for the EC2 Instance"
-  default=""
+  default     = ""
 }
 
 variable "tags" {
@@ -22,3 +22,4 @@ variable "aws_linux_user_data" {
   description = "User data for AWS Linux 2 AMI"
   default     = ""
 }
+

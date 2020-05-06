@@ -34,6 +34,9 @@ terraform workspace select dev
 # Launch/Upgrade Terraform
 terraform init -upgrade=true -var-file=vars/dev.tfvars
 terraform apply -var-file=vars/dev.tfvars
+
+# Fix “Interpolation-only expressions are deprecated” warning in Terraform
+terraform 0.12upgrade
 ```
 AWS CLI
 ```bash
